@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sci:data xmlns:sci="http://www.SciTegic.com/" object="SciTegic.Protocol.1">
+	<sci:component name="Read Image Document (OSRA)" version="2">
+		<sci:arg name="OnGeneralError" type="StringType" required="true" visibility="hidden" multi="false">
+			<sci:help>When an recoverable error occurs during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+			<sci:legalval selected="true">Halt</sci:legalval>
+			<sci:legalval>Fail</sci:legalval>
+			<sci:legalval>Pass</sci:legalval>
+		</sci:arg>
+		<sci:arg name="OnDataTypeError" type="StringType" required="true" visibility="hidden" multi="false">
+			<sci:help>When an expected data type is not found during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+			<sci:legalval selected="true">Halt</sci:legalval>
+			<sci:legalval>Fail</sci:legalval>
+			<sci:legalval>Pass</sci:legalval>
+		</sci:arg>
+		<sci:arg name="image" type="URLType" required="true" visibility="visible" multi="false">
+			<sci:help>Image document</sci:help>
+		</sci:arg>
+		<sci:arg name="osra.bat" type="URLType" required="true" visibility="visible" multi="false">
+			<sci:help>Path to osra.bat</sci:help>
+		</sci:arg>
+		<sci:arg name="resolution" type="LongType" required="true" visibility="visible" multi="false">
+			<sci:help>resolution in dots-per-inch</sci:help>
+			<sci:value>0</sci:value>
+		</sci:arg>
+		<sci:arg name="Tempfiles" type="StringType" required="false" visibility="hidden" multi="false" implbase="{17001C74-63CE-4B4B-B37C-F0EAA19CE4AA}">
+			<sci:help>Temporary files converted by the network to true temporary filenames</sci:help>
+			<sci:value>temp1</sci:value>
+		</sci:arg>
+		<sci:arg name="DeclareLocal" type="StringType" required="false" visibility="hidden" multi="false" implbase="{17001C74-63CE-4B4B-B37C-F0EAA19CE4AA}">
+			<sci:help>Lists a set of properties (without the @) to create on the property list for this protocol. Other properties are created on the global property list and are accessible from all protocols.</sci:help>
+		</sci:arg>
+		<sci:arg name="RunToCompletion" type="BoolType" required="false" visibility="hidden" multi="false" implbase="{17001C74-63CE-4B4B-B37C-F0EAA19CE4AA}">
+			<sci:help>When the network runs, processes once or until done for each process call</sci:help>
+			<sci:legalval selected="true">True</sci:legalval>
+			<sci:legalval>False</sci:legalval>
+		</sci:arg>
+		<sci:arg name="ComponentAttributes" type="StringType" required="false" visibility="hidden" multi="true">
+			<sci:help>Component Attributes</sci:help>
+			<sci:legalval>ComponentTakesInput</sci:legalval>
+			<sci:legalval selected="true">ComponentReturnsPass</sci:legalval>
+			<sci:legalval>ComponentReturnsFail</sci:legalval>
+			<sci:legalval>ComponentRunsLocal</sci:legalval>
+		</sci:arg>
+		<sci:arg name="Registrant" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>The user who registered this component.</sci:help>
+			<sci:value>igor</sci:value>
+		</sci:arg>
+		<sci:arg name="RegistrationDate" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>The date this component was registered.</sci:help>
+			<sci:value>Sun Feb 03 22:20:39 2008</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentComment" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Component Comment</sci:help>
+			<sci:value>Defines a subprotocol in a pipeline. When you are creating a pipeline that requires a subprotocol as a component, drag this component into the pipeline, open it, and add components to it.</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentUsage" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Component Usage</sci:help>
+			<sci:value>When you are creating a pipeline which requires a subprotocol as 
+a component, you can drag this SubProtocol component into the 
+pipeline, open it, and add components into it.</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentDisplayName" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Display Name</sci:help>
+			<sci:value>Read Image Document (OSRA)</sci:value>
+		</sci:arg>
+		<sci:arg name="ProtocolAutoLayout" type="BoolType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Protocol AutoLayout</sci:help>
+			<sci:value>1</sci:value>
+		</sci:arg>
+		<sci:arg name="ProtocolShowComment" type="BoolType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Protocol ShowComment</sci:help>
+			<sci:value>true</sci:value>
+		</sci:arg>
+		<sci:arg name="ProtocolComment" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Add Protocol Comment Here</sci:help>
+			<sci:value>Add Protocol Comment Here</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentDisabled" type="LongType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Disabled</sci:help>
+			<sci:value>0</sci:value>
+		</sci:arg>
+		<sci:arg name="CustomErrorText" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Custom Error Message</sci:help>
+		</sci:arg>
+		<sci:arg name="ComponentIcon" type="StringType" required="true" visibility="nevershow" multi="false">
+			<sci:help>Component Icon</sci:help>
+			<sci:value>SubProtocolNode</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentRevision" type="LongType" required="true" visibility="nevershow" multi="false">
+			<sci:help>Component Revision</sci:help>
+			<sci:value>100</sci:value>
+		</sci:arg>
+		<sci:arg name="DerivedFrom" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>The component this component is based upon.</sci:help>
+			<sci:value>SubProtocol</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentGUID" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>GUID</sci:help>
+			<sci:value>{4F5CB756-4C08-4484-B7DE-82D789CB43F1}</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentPoint" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Component Point</sci:help>
+			<sci:value>85 -400</sci:value>
+		</sci:arg>
+		<sci:arg name="ProtocolScale" type="LongType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Protocol Scale</sci:help>
+			<sci:value>0</sci:value>
+		</sci:arg>
+		<sci:arg name="ByReference" type="BoolType" required="false" visibility="nevershow" multi="false">
+			<sci:help>By Ref</sci:help>
+			<sci:value>0</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentHelp" type="StringType" required="false" visibility="nevershow" multi="true">
+			<sci:help>Fancy Help</sci:help>
+			<sci:legalval selected="true">100</sci:legalval>
+			<sci:legalval selected="true">Read image document using optical structure
+recognition - OSRA</sci:legalval>
+			<sci:legalval selected="true">Read in any of over 90 graphical formats
+including GIF, PNG, JPEG, TIFF, PDF and PS
+and parse images of chemical structures
+encountered within the document.</sci:legalval>
+			<sci:legalval selected="true">None</sci:legalval>
+			<sci:legalval selected="true"/>
+			<sci:legalval selected="true">Molecule</sci:legalval>
+			<sci:legalval selected="true">Records passing out of any unconnected pass ports of components inside the subprotocol</sci:legalval>
+			<sci:legalval selected="true">None</sci:legalval>
+			<sci:legalval selected="true">Records passing out of any unconnected fail ports of components inside the subprotocol</sci:legalval>
+		</sci:arg>
+		<sci:arg name="RegistrationVersion" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>The server version when this component was registered</sci:help>
+			<sci:value>5.0.1.100</sci:value>
+		</sci:arg>
+		<sci:arg name="Component Sticky Notes" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Component Sticky Notes</sci:help>
+		</sci:arg>
+		<sci:arg name="Protocol Sticky Notes" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Protocol Sticky Notes</sci:help>
+		</sci:arg>
+		<sci:arg name="Component Path" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Location of the component in the database.</sci:help>
+			<sci:value>igor\Read Image Document (OSRA)</sci:value>
+		</sci:arg>
+		<sci:arg name="ComponentRunTimeID" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Runtime Identifier</sci:help>
+			<sci:value>0</sci:value>
+		</sci:arg>
+		<sci:arg name="Protocol Options" type="StringType" required="false" visibility="nevershow" multi="false">
+			<sci:help>Protocol Options</sci:help>
+			<sci:legalval>Make Shortcut by Default</sci:legalval>
+			<sci:legalval>Owner Access Only</sci:legalval>
+		</sci:arg>
+	</sci:component>
+	<sci:protocol>
+		<sci:data object="SciTegic.RunProgram.1">
+			<sci:component name="Run Program (on Server)" version="2">
+				<sci:arg name="CommandLine" type="TextType" required="true" visibility="visible" multi="false">
+					<sci:help>Command line for application or file to execute on the server machine.</sci:help>
+					<sci:value>&quot;$(osra.bat)&quot; -r $(resolution) &quot;$(image)&quot;</sci:value>
+				</sci:arg>
+				<sci:arg name="WaitForExit" type="BoolType" required="false" visibility="visible" multi="false">
+					<sci:help>Whether or not to wait for the program to finish before returning from the process call.  This parameter must be set to True for StdinProperty, StdoutProperty, StderrProperty, or PropertyForExitStatus to function.</sci:help>
+					<sci:legalval selected="true">True</sci:legalval>
+					<sci:legalval>False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="PropertyForExitStatus" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Defines the property name to hold the value of the program exit status code. Denote a global property with a leading @ character.
+Note that this property can only be defined if WaitForExit is set to True.</sci:help>
+				</sci:arg>
+				<sci:arg name="StdinProperty" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Defines the property name that holds the desired value of the program&apos;s standard input (stdin). Denote a global property with a leading @ character. Note that this property can only be defined if WaitForExit is set to True.</sci:help>
+				</sci:arg>
+				<sci:arg name="StdoutProperty" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Defines the property name that will hold the program&apos;s standard output (stdout). Denote a global property with a leading @ character. Note that this property can only be defined if WaitForExit is set to True.</sci:help>
+					<sci:value>stdout</sci:value>
+				</sci:arg>
+				<sci:arg name="StderrProperty" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Defines the property name that will hold the program&apos;s standard error (stderr). Denote a global property with a leading @ character. Note that this property can only be defined if WaitForExit is set to True.</sci:help>
+				</sci:arg>
+				<sci:arg name="Environment" type="TextType" required="false" visibility="visible" multi="false">
+					<sci:help>Specifies additional environment variable settings that will be used by the spawned process.  Specify each setting on a line by itself as &quot;variable=name&quot;.  The spawned process will inherit the existing environment of the scisvr process, and any settings here will be appended to the variable list.  To make use of an existing variable, surround the variable name with percent signs (e.g. &quot;PATH=c:\mydir;%PATH%&quot;)  Note that this syntax should be used with both Windows and Linux servers.  Due to OS designs, environment variables are case insensitive on Windows servers and case sensitive on Linux servers.</sci:help>
+				</sci:arg>
+				<sci:arg name="UseCommandInterpreter" type="BoolType" required="false" visibility="hidden" multi="false">
+					<sci:help>Whether or not to add &quot;cmd.exe /c&quot; (or &quot;/bin/sh -c&quot; on Linux servers) to the command line.  This causes the command line to be interpreted through the operating systems standard command shell allowing the use of redirection specifiers such as &apos;&gt;&apos; and &apos;&lt;&apos; and piping via &apos;|&apos;.</sci:help>
+					<sci:legalval selected="true">True</sci:legalval>
+					<sci:legalval>False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="ComponentAttributes" type="StringType" required="false" visibility="hidden" multi="true">
+					<sci:help>Componet Attributes</sci:help>
+					<sci:legalval>ComponentTakesInput</sci:legalval>
+					<sci:legalval selected="true">ComponentReturnsPass</sci:legalval>
+					<sci:legalval>ComponentReturnsFail</sci:legalval>
+					<sci:legalval>ComponentRunsLocal</sci:legalval>
+				</sci:arg>
+				<sci:arg name="OnGeneralError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an recoverable error occurs during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="OnDataTypeError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an expected data type is not found during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="Registrant" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The user who registered this component.</sci:help>
+					<sci:value>scitegic/integration</sci:value>
+				</sci:arg>
+				<sci:arg name="RegistrationDate" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The date this component was registered.</sci:help>
+					<sci:value>Mon Apr 17 16:50:45 2006</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentGUID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>GUID</sci:help>
+					<sci:value>{1479A29D-F184-4979-BF60-2AA823D48831}</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentComment" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Comment</sci:help>
+					<sci:value>Runs a third-party Windows application on the Pipeline Pilot server
+machine. The command line is specified as it would be typed into
+a command shell window.
+
+The component also includes facilities for looking up a program name
+in the Windows registry, and so can interpret a program name as a
+ProgID, such as &quot;InternetExplorer.Application&quot;, or as a shell command,
+such as &quot;IsisServer&quot;, or as a document to be loaded into an associated
+program, such as &quot;c:\spreadsheet.xls&quot;.</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentUsage" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Usage</sci:help>
+					<sci:value>The CommandLine is the command to be run on the server by the component. This may take a number of different forms, since the component supports registry matching for the command name. 
+
+The basic option is to type in the full command line exactly as you would into a shell command window.
+
+But, due to the registry searching facility, the first space- or quote-delimited item of the command line may also be a ProgId, such as &quot;InternetExplorer.Application&quot;.
+This will start up Internet Explorer without having to specify the path to IE explicitly.
+
+Shell command associations are also supported, so &quot;IsisServer&quot; will start up Isis Draw, if installed.
+
+Tip: If your comand line includes a file path, create a new parameter for
+the component, of type URL for the user to enter the path. Then use a token replacement in the CommandLine to pick up the value.
+e.g. Notepad.exe &quot;$(SciTegicRoot)\$(Path)&quot;
+
+If WaitForExit is set to true, then the component blocks the data
+pipeline until the command has completed.
+
+The ConsoleMode argument may be used to open a command shell
+window to run the command. This may be useful to capture ouput from
+the program being run.
+
+The exit status of the command may be assigned to a global property or
+to a data record property, using the PropertyForExitStatus parameter.</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisplayName" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Display Name</sci:help>
+					<sci:value>Run Program (on Server)</sci:value>
+				</sci:arg>
+				<sci:arg name="DerivedFrom" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The component this component is based upon.</sci:help>
+					<sci:value>Run Program</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisabled" type="LongType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Disabled</sci:help>
+					<sci:value>4</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentPoint" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Point</sci:help>
+					<sci:value>85 -50</sci:value>
+				</sci:arg>
+				<sci:arg name="CustomErrorText" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Custom Error Message</sci:help>
+				</sci:arg>
+				<sci:arg name="ComponentIcon" type="StringType" required="true" visibility="nevershow" multi="false">
+					<sci:help>Component Icon</sci:help>
+					<sci:value>ComponentNode</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentHelp" type="StringType" required="false" visibility="nevershow" multi="true">
+					<sci:help>Fancy Help</sci:help>
+					<sci:legalval selected="true">100</sci:legalval>
+					<sci:legalval selected="true">Runs a Windows command line application on the server machine.</sci:legalval>
+					<sci:legalval selected="true">&lt;p&gt;Define the command line by entering text as you would in a command prompt window. The component includes facilities for looking up a program name in the Windows registry. It can interpret a program name as a ProgID, such as &quot;InternetExplorer.Application&quot;, or as a shell command, such as &quot;IsisServer&quot;, or as a document to load into an associated program, such as &quot;c:\spreadsheet.xls&quot;.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;CommandLine&lt;/i&gt;: The command that the component will run. The correct syntax is the full command line exactly as you would type it in a shell command window. The first space- or quote-delimited item of the command line can be a ProgId, such as &quot;InternetExplorer.Application&quot;. This starts up Internet Explorer (IE) without having to specify the path to IE explicitly. Shell command associations are also supported, so &quot;IsisServer&quot; will start Isis Draw. Finally, there is support for file associations, so the path &quot;D:\docs\notes.doc&quot; will start Microsoft Word and load the specified document.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;WaitForExit&lt;/i&gt;: When TRUE, the data pipeline is blocked until the command has completed.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;PropertyForExitStatus&lt;/i&gt;: Allows you to assign the exit status of the command to a global property or to a data record property. Use either a global or local property reference, such as @status or status.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;UseCommandInterpreter&lt;/i&gt;: When True, parses the command line through the command interpreter on the remote server (with a shell such as csh or bash or the windows interpreter cmd.exe). In particular, this needs to be set to True if the CommandLine utilizes standard output or input (such as cmd.exe /c &amp;quot;c:\Program Files\R\rterm.exe&amp;quot; &amp;quot;0&amp;lt;$(CommandFile)&amp;quot;).&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;StdinProperty, StdoutProperty, and StderrProperty&lt;/i&gt;: Allows you to redirect standard communications to global properties or to data record properties. Use either a global or local property reference, such as @stdin or stdin.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Environment&lt;/i&gt;: Specifies additional environment variable settings that will be used by the spawned process.  Specify each setting on a line by itself as &quot;variable=name&quot;.  The spawned process will inherit the existing environment of the PipelinePilot process, and any settings defined here will be appended to the variable list.  To make use of an existing variable, surround the variable name with percent signs (e.g. &quot;PATH=c:\mydir;%PATH%&quot;).  Since this will run on the Windows client, all environment variables are case insensitive.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Notes:&lt;/b&gt;
+&lt;ul&gt;
+&lt;li&gt; If your command line includes a file path, create a new parameter for the component, of type URL, so the user can enter the path. Then use a token replacement in the CommandLine to pick up the value. For example: Notepad.exe &quot;$(SciTegicRoot)\$(Path)&quot;. &lt;/li&gt;
+&lt;li&gt;When the component is separated from any other pipeline, the command line is run just once.&lt;/li&gt; &lt;li&gt;You can add an input or output pass port to the component, to integrate it with a pipeline. If there is an output port, but no input port, the command is run once and a single new record is generated. If there is an input port, then the command is run once for each data record passed in.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more details, see the help topic in the User Guide for &lt;a href=&quot;javascript:DoLink(&apos;scihelpdocs/user/extend/runprogram/runprogram_server.htm&apos;)&quot;&gt;Run 
+  Program (on Server)&lt;/a&gt;.&lt;/p&gt;</sci:legalval>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true">Generic Data</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval selected="true"/>
+				</sci:arg>
+				<sci:arg name="Component Sticky Notes" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Sticky Notes</sci:help>
+				</sci:arg>
+				<sci:arg name="RegistrationVersion" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The server version when this component was registered</sci:help>
+					<sci:value>5.0.1.100</sci:value>
+				</sci:arg>
+				<sci:arg name="Component Path" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Location of the component in the database.</sci:help>
+					<sci:value>Components\Integration\Application Integrators\Run Program (on Server)</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentRunTimeID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Runtime Identifier</sci:help>
+					<sci:value>0:0</sci:value>
+				</sci:arg>
+			</sci:component>
+		</sci:data>
+		<sci:data object="SciTegic.TextWriter.1">
+			<sci:component name="Text Writer" version="2">
+				<sci:arg name="Destination" type="URLType" required="true" visibility="visible" multi="false">
+					<sci:help>The filename for the destination data. Be sure to specify an extension such as .txt or .doc. To save in compressed (zipped) format, add the extension .gz to the filename.</sci:help>
+					<sci:value>$(temp1)</sci:value>
+				</sci:arg>
+				<sci:arg name="Maximum" type="LongType" required="false" visibility="visible" multi="false">
+					<sci:help>The maximum number of data records to write (all if value is empty)</sci:help>
+				</sci:arg>
+				<sci:arg name="IfFileExists" type="StringType" required="true" visibility="visible" multi="false">
+					<sci:help>What to do if the given destination file already exists</sci:help>
+					<sci:legalval selected="true">Overwrite</sci:legalval>
+					<sci:legalval>Append</sci:legalval>
+					<sci:legalval>Halt</sci:legalval>
+				</sci:arg>
+				<sci:arg name="PropertyNames" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>List of properties to write (separated by commas). &quot;*&quot; indicates to write all properties.</sci:help>
+					<sci:value>stdout</sci:value>
+				</sci:arg>
+				<sci:arg name="IncludePropertyNames" type="BoolType" required="true" visibility="visible" multi="false">
+					<sci:help>Display the name of each property along with its values</sci:help>
+					<sci:legalval>True</sci:legalval>
+					<sci:legalval selected="true">False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="BeginningText" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Text that should preceed each record</sci:help>
+				</sci:arg>
+				<sci:arg name="EndingText" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Any text to be included after each record</sci:help>
+				</sci:arg>
+				<sci:arg name="OnGeneralError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an recoverable error occurs during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="OnDataTypeError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an expected data type is not found during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="ComponentAttributes" type="StringType" required="false" visibility="hidden" multi="true">
+					<sci:help>Component Attributes</sci:help>
+					<sci:legalval selected="true">ComponentTakesInput</sci:legalval>
+					<sci:legalval>ComponentReturnsPass</sci:legalval>
+					<sci:legalval>ComponentReturnsFail</sci:legalval>
+					<sci:legalval>ComponentRunsLocal</sci:legalval>
+				</sci:arg>
+				<sci:arg name="Binary" type="BoolType" required="false" visibility="visible" multi="false">
+					<sci:help>Open the file in binary mode to output non-textual information</sci:help>
+					<sci:legalval>True</sci:legalval>
+					<sci:legalval selected="true">False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="CharacterEncoding" type="StringType" required="false" visibility="hidden" multi="false">
+					<sci:help>&lt;p&gt;Indicates the character set that will be used within the file.&lt;/p&gt;
+ 
+&lt;p&gt;ANSI is the default and specifies a character set where each character is defined by a single byte.  This allows the Latin-1 (ISO-8859-1) character set to be written to the file.  Virtually all applications can read these files.&lt;/p&gt;
+ 
+&lt;p&gt;UTF-8 specifies a variable length character set.  Each character is represented by 1 to 6 bytes.  This allows writing out all extended characters specified in the Unicode character sets while maintaining reasonably lengthed files.  Many applications do not support UTF-8 files.&lt;/p&gt;
+ 
+&lt;p&gt;&quot;Unicode&quot; and &quot;Unicode big endian&quot; are sets where each character is represented by exactly 2 bytes (also known as UCS-2).  Depending on which is used will determine the order in which the bytes appear for each character. Many applications do not support Unicode or Unicode big endian files.&lt;/p&gt;
+ 
+&lt;p&gt;For more information about each of these ecoding styles, go to &lt;a href=&quot;http://www.unicode.org/&quot;&gt;http://www.unicode.org/&lt;/a&gt;&lt;/p&gt;</sci:help>
+					<sci:legalval selected="true">ANSI</sci:legalval>
+					<sci:legalval>UTF-8</sci:legalval>
+					<sci:legalval>Unicode</sci:legalval>
+					<sci:legalval>Unicode big endian</sci:legalval>
+				</sci:arg>
+				<sci:arg name="ComponentComment" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Comment</sci:help>
+					<sci:value>Data records are formatted as text written to disk as a Destination file. Separation between data records can be indicated with characters such as ---------.</sci:value>
+				</sci:arg>
+				<sci:arg name="Registrant" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The user who registered this component.</sci:help>
+					<sci:value>scitegic/core</sci:value>
+				</sci:arg>
+				<sci:arg name="RegistrationDate" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The date this component was registered.</sci:help>
+					<sci:value>Mon Apr 17 16:50:22 2006</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentUsage" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Usage</sci:help>
+					<sci:value>Data records are formatted as text written to disk as a &apos;Destination&apos; file.  Separation between data records can be indicated with user specified characters such as ---------.
+
+Input - data records</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisplayName" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Display Name</sci:help>
+					<sci:value>Text Writer</sci:value>
+				</sci:arg>
+				<sci:arg name="CustomErrorText" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Custom Error Message</sci:help>
+				</sci:arg>
+				<sci:arg name="ComponentIcon" type="StringType" required="true" visibility="nevershow" multi="false">
+					<sci:help>Component Icon</sci:help>
+					<sci:value>DocumentNode</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentGUID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>GUID</sci:help>
+					<sci:value>{63DD362C-76B3-49A7-9CEF-2C45D21F90CB}</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentPoint" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Point</sci:help>
+					<sci:value>360 -50</sci:value>
+				</sci:arg>
+				<sci:arg name="DerivedFrom" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The component this component is based upon.</sci:help>
+					<sci:value>Text Writer</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisabled" type="LongType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Disabled</sci:help>
+					<sci:value>0</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentHelp" type="StringType" required="false" visibility="nevershow" multi="true">
+					<sci:help>Fancy Help</sci:help>
+					<sci:legalval selected="true">100</sci:legalval>
+					<sci:legalval selected="true">Formats and writes textual data records to a file.</sci:legalval>
+					<sci:legalval selected="true">&lt;p&gt;Data records are formatted as text written to disk as a &lt;i&gt;Destination&lt;/i&gt; 
+  file. You can specify how to separate the data records. &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;javascript:DoLink(&apos;{9B0081A4-6085-4FF0-BD12-AEB8B7BD9CB5}&apos;)&quot;&gt;See Also:&lt;/a&gt;&quot;Delimited 
+  Text Writer&quot;. To write a file formatted with one record per row with delimiters 
+  between the data use the &quot;Delimited Text Writer&quot;.&lt;/p&gt;</sci:legalval>
+					<sci:legalval selected="true">Generic Data</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval selected="true"/>
+				</sci:arg>
+				<sci:arg name="RegistrationVersion" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The server version when this component was registered</sci:help>
+					<sci:value>5.0.1.100</sci:value>
+				</sci:arg>
+				<sci:arg name="Component Sticky Notes" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Sticky Notes</sci:help>
+				</sci:arg>
+				<sci:arg name="Component Path" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Location of the component in the database.</sci:help>
+					<sci:value>Components\Generic\Writers\Text Writer</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentRunTimeID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Runtime Identifier</sci:help>
+					<sci:value>0:1</sci:value>
+				</sci:arg>
+			</sci:component>
+		</sci:data>
+		<sci:data object="SciTegic.RunProgramOnClient.1">
+			<sci:component name="Run Program (on Client)" version="2">
+				<sci:arg name="CommandLine" type="TextType" required="true" visibility="visible" multi="false">
+					<sci:help>Command line for application or file to execute on the client machine.</sci:help>
+					<sci:value>&quot;$(osra.bat)&quot; -r $(resolution) &quot;$(image)&quot;</sci:value>
+				</sci:arg>
+				<sci:arg name="WaitForExit" type="BoolType" required="false" visibility="visible" multi="false">
+					<sci:help>Whether or not to wait for the program to finish before returning from the process call.  This parameter must be set to True for StdinProperty, StdoutProperty, StderrProperty, or PropertyForExitStatus to function.</sci:help>
+					<sci:legalval selected="true">True</sci:legalval>
+					<sci:legalval>False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="PropertyForExitStatus" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>A property may be defined to hold the value of the program exit status code. Denote a global property with a leading @ character.
+Note that this property can only be defined if WaitForExit is set to True.</sci:help>
+				</sci:arg>
+				<sci:arg name="StdinProperty" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Defines the property name that holds the desired value of the program&apos;s standard input (stdin). Denote a global property with a leading @ character.  Note that this property can only be defined if WaitForExit is set to True.</sci:help>
+				</sci:arg>
+				<sci:arg name="StdoutProperty" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Defines the property name that will hold the program&apos;s standard output (stdout). Denote a global property with a leading @ character. Note that this property can only be defined if WaitForExit is set to True.</sci:help>
+					<sci:value>stdout</sci:value>
+				</sci:arg>
+				<sci:arg name="StderrProperty" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Defines the property name that will hold the program&apos;s standard error (stderr). Denote a global property with a leading @ character. Note that this property can only be defined if WaitForExit is set to True.</sci:help>
+				</sci:arg>
+				<sci:arg name="Environment" type="TextType" required="false" visibility="visible" multi="false">
+					<sci:help>Specifies additional environment variable settings that will be used by the spawned process.  Specify each setting on a line by itself as &quot;variable=name&quot;.  The spawned process will inherit the existing environment of the PipelinePilot process, and any settings defined here will be appended to the variable list.  To make use of an existing variable, surround the variable name with percent signs (e.g. &quot;PATH=c:\mydir;%PATH%&quot;).  Since this will run on the Windows client, all environment variables are case insensitive.</sci:help>
+				</sci:arg>
+				<sci:arg name="ConsoleMode" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Specifies the console window behavior. It only applies if UseCommandInterpreter is set to &apos;True&apos; and StdinProperty, StdoutProperty, and StderrProperty are not defined.  &apos;Hide&apos; prevents the console from
+being displayed. &apos;Show&apos; displays the console window for program output. &apos;ShowAndKeepOpen&apos; leaves the console window on the screen after the program finishes.</sci:help>
+					<sci:legalval>Hide</sci:legalval>
+					<sci:legalval>Show</sci:legalval>
+					<sci:legalval selected="true">ShowAndKeepOpen</sci:legalval>
+				</sci:arg>
+				<sci:arg name="UseCommandInterpreter" type="BoolType" required="false" visibility="hidden" multi="false">
+					<sci:help>Whether or not to add &quot;cmd.exe /c&quot; (or &quot;/bin/sh -c&quot; on Linux servers) to the command line. </sci:help>
+					<sci:legalval selected="true">True</sci:legalval>
+					<sci:legalval>False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="ComponentAttributes" type="StringType" required="false" visibility="hidden" multi="true">
+					<sci:help>Componet Attributes</sci:help>
+					<sci:legalval>ComponentTakesInput</sci:legalval>
+					<sci:legalval selected="true">ComponentReturnsPass</sci:legalval>
+					<sci:legalval>ComponentReturnsFail</sci:legalval>
+					<sci:legalval selected="true">ComponentRunsLocal</sci:legalval>
+				</sci:arg>
+				<sci:arg name="OnGeneralError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an recoverable error occurs during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="OnDataTypeError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an expected data type is not found during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="Registrant" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The user who registered this component.</sci:help>
+					<sci:value>scitegic/integration</sci:value>
+				</sci:arg>
+				<sci:arg name="RegistrationDate" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The date this component was registered.</sci:help>
+					<sci:value>Mon Apr 17 16:50:45 2006</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentGUID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>GUID</sci:help>
+					<sci:value>{31F51162-FA9C-45CC-BE59-A2C0F7D8098B}</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentComment" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Comment</sci:help>
+					<sci:value>Runs a third-party Windows application on the Pipeline Pilot client
+machine. The command line is specified as it would be typed into
+a command shell window.
+
+The component also includes facilities for looking up a program name
+in the Windows registry, and so can interpret a program name as a
+ProgID, such as &quot;InternetExplorer.Application&quot;, or as a shell command,
+such as &quot;IsisServer&quot;, or as a document to be loaded into an associated
+program, such as &quot;c:\spreadsheet.xls&quot;.</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentUsage" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Usage</sci:help>
+					<sci:value>The CommandLine is the command to be run on the client by the component. This may take a number of different forms, since the component supports registry matching for the command name. 
+
+The basic option is to type in the full command line exactly as you would into a shell command window.
+
+But, due to the registry searching facility, the first space- or quote-delimited item of the command line may also be a ProgId, such as &quot;InternetExplorer.Application&quot;.
+This will start up Internet Explorer without having to specify the path to IE explicitly.
+
+Shell command associations are also supported, so &quot;IsisServer&quot; will start up Isis Draw, if installed.
+
+Tip: If your comand line includes a file path, create a new parameter for
+the component, of type URL for the user to enter the path. Then use a token replacement in the CommandLine to pick up the value.
+e.g. Notepad.exe &quot;$(SciTegicRoot)\$(Path)&quot;
+
+If WaitForExit is set to true, then the component blocks the data
+pipeline until the command has completed.
+
+The ConsoleMode argument may be used to open a command shell
+window to run the command. This may be useful to capture ouput from
+the program being run.
+
+The exit status of the command may be assigned to a global property or
+to a data record property, using the PropertyForExitStatus parameter.</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisplayName" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Display Name</sci:help>
+					<sci:value>Run Program (on Client)</sci:value>
+				</sci:arg>
+				<sci:arg name="DerivedFrom" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The component this component is based upon.</sci:help>
+					<sci:value>Run Program</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisabled" type="LongType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Disabled</sci:help>
+					<sci:value>0</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentPoint" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Point</sci:help>
+					<sci:value>85 -350</sci:value>
+				</sci:arg>
+				<sci:arg name="CustomErrorText" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Custom Error Message</sci:help>
+				</sci:arg>
+				<sci:arg name="ComponentIcon" type="StringType" required="true" visibility="nevershow" multi="false">
+					<sci:help>Component Icon</sci:help>
+					<sci:value>ComponentNode</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentHelp" type="StringType" required="false" visibility="nevershow" multi="true">
+					<sci:help>Fancy Help</sci:help>
+					<sci:legalval selected="true">100</sci:legalval>
+					<sci:legalval selected="true">Runs a Windows command line application on the server machine.</sci:legalval>
+					<sci:legalval selected="true">&lt;p&gt;Define the command line by entering text as you would in a command prompt window. The component includes facilities for looking up a program name in the Windows registry. It can interpret a program name as a ProgID, such as &quot;InternetExplorer.Application&quot;, or as a shell command, such as &quot;IsisServer&quot;, or as a document to load into an associated program, such as &quot;c:\spreadsheet.xls&quot;.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;CommandLine&lt;/i&gt;: The command that the component will run. The correct syntax is the full command line exactly as you would type it in a shell command window. The first space- or quote-delimited item of the command line can be a ProgId, such as &quot;InternetExplorer.Application&quot;. This starts up Internet Explorer (IE) without having to specify the path to IE explicitly. Shell command associations are also supported, so &quot;IsisServer&quot; will start Isis Draw. Finally, there is support for file associations, so the path &quot;D:\docs\notes.doc&quot; will start Microsoft Word and load the specified document.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;WaitForExit&lt;/i&gt;: When TRUE, the data pipeline is blocked until the command has completed.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;PropertyForExitStatus&lt;/i&gt;: Allows you to assign the exit status of the command to a global property or to a data record property. Use either a global or local property reference, such as @status or status.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;StdinProperty, StdoutProperty, and StderrProperty&lt;/i&gt;: Allows you to redirect standard communications to global properties or to data record properties. Use either a global or local property reference, such as @stdin or stdin.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;Environment&lt;/i&gt;: Specifies additional environment variable settings that will be used by the spawned process.  Specify each setting on a line by itself as &quot;variable=name&quot;.  The spawned process will inherit the existing environment of the PipelinePilot process, and any settings defined here will be appended to the variable list.  To make use of an existing variable, surround the variable name with percent signs (e.g. &quot;PATH=c:\mydir;%PATH%&quot;).  Since this will run on the Windows client, all environment variables are case insensitive.&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;UseCommandInterpreter&lt;/i&gt;: When True, parses the command line through the command interpreter on the remote server (with a shell such as csh or bash or the windows interpreter cmd.exe). In particular, this needs to be set to True if the CommandLine utilizes standard output or input redirection (such as cmd.exe /c &amp;quot;c:\Program Files\R\rterm.exe&amp;quot; &amp;quot;0&amp;lt;$(CommandFile)&amp;quot;).&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Notes:&lt;/b&gt;
+&lt;ul&gt;
+&lt;li&gt; If your command line includes a file path, create a new parameter for the component, of type URL, so the user can enter the path. Then use a token replacement in the CommandLine to pick up the value. For example: Notepad.exe &quot;$(SciTegicRoot)\$(Path)&quot;. &lt;/li&gt;
+&lt;li&gt;When the component is separated from any other pipeline, the command line is run just once.&lt;/li&gt;
+  &lt;li&gt;You can add an input or output pass port to the component, to integrate it with a pipeline. If there is an output port, but no input port, the command is run once and a single new record is generated. If there is an input port, then the command is run once for each data record passed in.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more details, see the help topic in the User Guide for &lt;a href=&quot;javascript:DoLink(&apos;scihelpdocs/user/extend/runprogram/runprogram_client.htm&apos;)&quot;&gt;Run 
+  Program (on Client)&lt;/a&gt;.&lt;/p&gt;</sci:legalval>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true">Generic Data</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval selected="true"/>
+				</sci:arg>
+				<sci:arg name="Component Sticky Notes" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Sticky Notes</sci:help>
+				</sci:arg>
+				<sci:arg name="RegistrationVersion" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The server version when this component was registered</sci:help>
+					<sci:value>5.0.1.100</sci:value>
+				</sci:arg>
+				<sci:arg name="Component Path" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Location of the component in the database.</sci:help>
+					<sci:value>Components\Integration\Application Integrators\Run Program (on Client)</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentRunTimeID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Runtime Identifier</sci:help>
+					<sci:value>0:2</sci:value>
+				</sci:arg>
+			</sci:component>
+		</sci:data>
+		<sci:data object="SciTegic.SMIReader.1">
+			<sci:component name="SMILES Reader" version="2">
+				<sci:arg name="Source" type="URLType" required="true" visibility="visible" multi="false">
+					<sci:help>The file or URL source to read</sci:help>
+					<sci:value>$(temp1)</sci:value>
+				</sci:arg>
+				<sci:arg name="Maximum" type="LongType" required="false" visibility="visible" multi="false">
+					<sci:help>The maximum number of data records to read (all if value is empty)</sci:help>
+				</sci:arg>
+				<sci:arg name="Keep Properties" type="PropertyPreviewType" required="false" visibility="visible" multi="false">
+					<sci:help>A list of properties the reader should retain for each data record that is output. If a value is not defined, retains all properties. If the parameter contains the value &quot;-&quot; (minus sign), properties are not retained.</sci:help>
+				</sci:arg>
+				<sci:arg name="PutDataInProperty" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Specifies the name of the property to hold any data associated with a given SMILES</sci:help>
+				</sci:arg>
+				<sci:arg name="PutSmilesInProperty" type="StringType" required="false" visibility="visible" multi="false">
+					<sci:help>Specifies the name of the property to hold the SMILES data</sci:help>
+					<sci:value>Original_Smiles</sci:value>
+				</sci:arg>
+				<sci:arg name="SourceTag" type="StringType" required="true" visibility="visible" multi="false">
+					<sci:help>The type of tag to create to identify the source of data records. A property called &quot;SourceTag&quot; is created and holds the value indicated.
+
+ - None: No SourceTag property is created and any existing ones are removed.
+
+ - Filename: The name of the file read.
+
+ - FilenameAndExtension: The name of the file read with its file extension.
+
+ - FullFilename: The name of the file read, including the directory path.
+
+ - Number: When multiple files are read in this component, they are numbered 1,2,3...
+
+ - Letter: When multiple files are read in this component, they are lettered A, B, C...
+
+ - KeepCurrent: Keeps the current value of SourceTag.
+
+</sci:help>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval>Filename</sci:legalval>
+					<sci:legalval>FilenameAndExtension</sci:legalval>
+					<sci:legalval>FullFilename</sci:legalval>
+					<sci:legalval>Number</sci:legalval>
+					<sci:legalval>Letter</sci:legalval>
+					<sci:legalval>KeepCurrent</sci:legalval>
+				</sci:arg>
+				<sci:arg name="KekulizeAromaticBonds" type="StringType" required="false" visibility="hidden" multi="false">
+					<sci:help>Turn aromatic bonds into single/double bonds or into aromatic query bonds. Molecules created with aromatic query bonds are more suitable as queries than as specific molecules. They should not be used as input for property calculators such as Molecular Weight, pKa and others, which require the structure to be uniquely defined. </sci:help>
+					<sci:legalval>True</sci:legalval>
+					<sci:legalval selected="true">False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="SkipFirstLine" type="StringType" required="false" visibility="hidden" multi="false">
+					<sci:help>Skips the first line in the file (usually a header line)</sci:help>
+					<sci:legalval>True</sci:legalval>
+					<sci:legalval selected="true">False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="OnDataTypeError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an expected data type is not found during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="OnGeneralError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an recoverable error occurs during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="ComponentAttributes" type="StringType" required="false" visibility="hidden" multi="true">
+					<sci:help>Component Attributes</sci:help>
+					<sci:legalval>ComponentTakesInput</sci:legalval>
+					<sci:legalval selected="true">ComponentReturnsPass</sci:legalval>
+					<sci:legalval>ComponentReturnsFail</sci:legalval>
+					<sci:legalval>ComponentRunsLocal</sci:legalval>
+				</sci:arg>
+				<sci:arg name="DeleteOnClose" type="BoolType" required="true" visibility="nevershow" multi="false">
+					<sci:help>Delete the file after the data is read [Be Careful!]</sci:help>
+					<sci:legalval>True</sci:legalval>
+					<sci:legalval selected="true">False</sci:legalval>
+				</sci:arg>
+				<sci:arg name="ComponentComment" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Comment</sci:help>
+					<sci:value>Reads molecules defined as Daylight SMILES in a text file</sci:value>
+				</sci:arg>
+				<sci:arg name="Registrant" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The user who registered this component.</sci:help>
+					<sci:value>scitegic/chemistry</sci:value>
+				</sci:arg>
+				<sci:arg name="RegistrationDate" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The date this component was registered.</sci:help>
+					<sci:value>Mon Apr 17 16:50:27 2006</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentUsage" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Usage</sci:help>
+					<sci:value>Creates a molecule data record for each molecule represented in the &apos;Source&apos; data file.  Can read zipped (.zip) and url-based files.  The reader expects one SMILES per line in the file. Any text after any white space is treated as data. The SMILES string itself can be retained as a data item for further processing.
+
+For additional information on SMILES, see www.daylight.com.
+
+Output Pass  - Molecule data records</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisplayName" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Display Name</sci:help>
+					<sci:value>SMILES Reader</sci:value>
+				</sci:arg>
+				<sci:arg name="CustomErrorText" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Custom Error Message</sci:help>
+				</sci:arg>
+				<sci:arg name="ComponentIcon" type="StringType" required="true" visibility="nevershow" multi="false">
+					<sci:help>Component Icon</sci:help>
+					<sci:value>DocumentNode</sci:value>
+				</sci:arg>
+				<sci:arg name="DerivedFrom" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The component this component is based upon.</sci:help>
+					<sci:value>SMILES Reader</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisabled" type="LongType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Disabled</sci:help>
+					<sci:value>0</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentGUID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>GUID</sci:help>
+					<sci:value>{60FC1A04-61FD-4D4F-AC3F-A818AB614C78}</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentPoint" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Point</sci:help>
+					<sci:value>85 -625</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentHelp" type="StringType" required="false" visibility="nevershow" multi="true">
+					<sci:help>Fancy Help</sci:help>
+					<sci:legalval selected="true">100</sci:legalval>
+					<sci:legalval selected="true">Reads molecules defined as Daylight SMILES in a text file.</sci:legalval>
+					<sci:legalval selected="true">Creates a molecule data record for each molecule represented in the &lt;I&gt;Source&lt;/I&gt; data file.  Can read zipped (.zip) and URL-based files.  The reader expects one SMILES per line in the file. Any text after any white space is treated as data. The SMILES string itself can be retained as a data item for further processing.
+
+For additional information on SMILES, see www.daylight.com.
+</sci:legalval>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true">Molecule</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true">None</sci:legalval>
+					<sci:legalval selected="true"/>
+				</sci:arg>
+				<sci:arg name="Component Sticky Notes" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Sticky Notes</sci:help>
+				</sci:arg>
+				<sci:arg name="RegistrationVersion" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The server version when this component was registered</sci:help>
+					<sci:value>5.0.1.100</sci:value>
+				</sci:arg>
+				<sci:arg name="Component Path" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Location of the component in the database.</sci:help>
+					<sci:value>Components\Chemistry\Readers\SMILES Reader</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentRunTimeID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Runtime Identifier</sci:help>
+					<sci:value>0:3</sci:value>
+				</sci:arg>
+			</sci:component>
+		</sci:data>
+		<sci:data object="SciTegic.ServerAction.1">
+			<sci:component name="Delete File" version="2">
+				<sci:arg name="OnGeneralError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an recoverable error occurs during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="OnDataTypeError" type="StringType" required="true" visibility="hidden" multi="false">
+					<sci:help>When an expected data type is not found during processing:  
+  Halt: Terminate the execution of the network
+  Fail: Continue execution of the network, passing data out the Fail(red) port
+  Pass: Continue execution of the network, passing data out the Pass(green) port</sci:help>
+					<sci:legalval selected="true">Halt</sci:legalval>
+					<sci:legalval>Fail</sci:legalval>
+					<sci:legalval>Pass</sci:legalval>
+				</sci:arg>
+				<sci:arg name="ComponentAttributes" type="StringType" required="false" visibility="hidden" multi="true">
+					<sci:help>Componet Attributes</sci:help>
+					<sci:legalval>ComponentTakesInput</sci:legalval>
+					<sci:legalval>ComponentReturnsPass</sci:legalval>
+					<sci:legalval>ComponentReturnsFail</sci:legalval>
+					<sci:legalval>ComponentRunsLocal</sci:legalval>
+				</sci:arg>
+				<sci:arg name="Filename" type="URLType" required="true" visibility="visible" multi="false">
+					<sci:help>The path name of the file to be deleted.</sci:help>
+					<sci:value>$(temp1)</sci:value>
+				</sci:arg>
+				<sci:arg name="Argument1" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Parameter Help</sci:help>
+					<sci:value>$(Filename)</sci:value>
+				</sci:arg>
+				<sci:arg name="Action" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Parameter Help</sci:help>
+					<sci:legalval>WaitForFileExists</sci:legalval>
+					<sci:legalval selected="true">DeleteFile</sci:legalval>
+					<sci:legalval>DeleteComponent</sci:legalval>
+					<sci:legalval>ListComponents</sci:legalval>
+				</sci:arg>
+				<sci:arg name="Registrant" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The user who registered this component.</sci:help>
+					<sci:value>scitegic/core</sci:value>
+				</sci:arg>
+				<sci:arg name="RegistrationDate" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The date this component was registered.</sci:help>
+					<sci:value>Mon Apr 17 16:50:20 2006</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentComment" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Comment</sci:help>
+					<sci:value>Delete a file from the system.</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentUsage" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Usage</sci:help>
+					<sci:value>Delete a file from the system</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisplayName" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Display Name</sci:help>
+					<sci:value>Delete File</sci:value>
+				</sci:arg>
+				<sci:arg name="CustomErrorText" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Custom Error Message</sci:help>
+				</sci:arg>
+				<sci:arg name="ComponentIcon" type="StringType" required="true" visibility="nevershow" multi="false">
+					<sci:help>Component Icon</sci:help>
+					<sci:value>ComponentNode</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentGUID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>GUID</sci:help>
+					<sci:value>{38A20EDC-8D3C-42EF-97BA-D1B40B74FFE0}</sci:value>
+				</sci:arg>
+				<sci:arg name="DerivedFrom" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The component this component is based upon.</sci:help>
+					<sci:value>Delete File</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentDisabled" type="LongType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Disabled</sci:help>
+					<sci:value>0</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentPoint" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Point</sci:help>
+					<sci:value>85 -925</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentHelp" type="StringType" required="false" visibility="nevershow" multi="true">
+					<sci:help>Fancy Help</sci:help>
+					<sci:legalval selected="true">100</sci:legalval>
+					<sci:legalval selected="true">Delete a file from the system.</sci:legalval>
+					<sci:legalval selected="true">Delete a file from the system</sci:legalval>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true"/>
+					<sci:legalval selected="true"/>
+				</sci:arg>
+				<sci:arg name="RegistrationVersion" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>The server version when this component was registered</sci:help>
+					<sci:value>5.0.1.100</sci:value>
+				</sci:arg>
+				<sci:arg name="ComponentRunTimeID" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Runtime Identifier</sci:help>
+					<sci:value>0:4</sci:value>
+				</sci:arg>
+				<sci:arg name="Component Sticky Notes" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Component Sticky Notes</sci:help>
+				</sci:arg>
+				<sci:arg name="Component Path" type="StringType" required="false" visibility="nevershow" multi="false">
+					<sci:help>Location of the component in the database.</sci:help>
+					<sci:value>Components\Generic\Utilities\File Utilities\Delete File</sci:value>
+				</sci:arg>
+			</sci:component>
+		</sci:data>
+		<sci:connect from="0" to="1" type="true"/>
+		<sci:connect from="2" to="1" type="true"/>
+		<sci:version iVal="4"/>
+	</sci:protocol>
+</sci:data>

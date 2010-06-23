@@ -1,0 +1,226 @@
+diff -Naur molsketch-0.1.1deuterium/src/call_osra.cpp molsketch-osra/src/call_osra.cpp
+--- molsketch-0.1.1deuterium/src/call_osra.cpp	1969-12-31 19:00:00.000000000 -0500
++++ molsketch-osra/src/call_osra.cpp	2009-01-04 19:12:59.000000000 -0500
+@@ -0,0 +1,36 @@
++#include "molecule.h"
++#include "fileio.h"
++
++
++Molecule*  call_osra(QString fileName)
++{
++  int n=0;
++  QString tmpresult=tmpnam(NULL);
++  tmpresult+=".sdf";
++  QString command;
++  char *env=getenv("OSRA");
++  if (env!=NULL)  command=env;
++  else command="osra";
++  command+=" -f sdf "+fileName+">"+tmpresult;
++  system(command.toAscii());
++  Molecule* mol = molsKetch::loadFile(tmpresult);
++  if (mol) 
++    {
++      qreal x_avg=0,y_avg=0;
++      foreach(Atom* atom, mol->atoms())
++	{
++	  x_avg+=atom->x();
++	  y_avg+=atom->y();
++	  n++;
++	}
++      if (n>0)
++	{
++	  x_avg/=n;
++	  y_avg/=n;
++	  foreach(Atom* atom, mol->atoms()) atom->setPos(atom->x()-x_avg,y_avg-atom->y());
++	}
++    }
++  remove(tmpresult.toAscii());
++  return mol;
++}
++
+diff -Naur molsketch-0.1.1deuterium/src/call_osra.h molsketch-osra/src/call_osra.h
+--- molsketch-0.1.1deuterium/src/call_osra.h	1969-12-31 19:00:00.000000000 -0500
++++ molsketch-osra/src/call_osra.h	2009-01-04 19:07:49.000000000 -0500
+@@ -0,0 +1 @@
++Molecule*  call_osra(QString fileName);
+diff -Naur molsketch-0.1.1deuterium/src/CMakeLists.txt molsketch-osra/src/CMakeLists.txt
+--- molsketch-0.1.1deuterium/src/CMakeLists.txt	2007-04-30 14:18:22.000000000 -0400
++++ molsketch-osra/src/CMakeLists.txt	2009-01-04 19:10:02.000000000 -0500
+@@ -10,7 +10,7 @@
+ qt4_wrap_ui(molsketch_UIS_H ${molsketch_UIS})
+ 
+ # Set the variable with all the sourcecode
+-set(molsketch_SRCS main.cpp mainwindow.cpp molecule.cpp atom.cpp bond.cpp element.cpp mollibitem.cpp molview.cpp molscene.cpp settings.cpp fileio.cpp commands.cpp periodictablewidget.cpp)
++set(molsketch_SRCS main.cpp mainwindow.cpp molecule.cpp atom.cpp bond.cpp element.cpp mollibitem.cpp molview.cpp molscene.cpp settings.cpp fileio.cpp commands.cpp periodictablewidget.cpp call_osra.cpp)
+ 
+ # Including the resources
+ qt4_add_resources(molsketch_SRCS molsketch.qrc)
+diff -Naur molsketch-0.1.1deuterium/src/mainwindow.cpp molsketch-osra/src/mainwindow.cpp
+--- molsketch-0.1.1deuterium/src/mainwindow.cpp	2007-04-30 14:18:22.000000000 -0400
++++ molsketch-osra/src/mainwindow.cpp	2009-01-04 20:55:07.000000000 -0500
+@@ -31,6 +31,8 @@
+ #include "mollibitem.h"
+ #include "periodictablewidget.h"
+ 
++#include "call_osra.h"
++
+ #define PROGRAM_NAME "molsKetch"
+ #define PROGRAM_VERSION "Deuterium"
+ 
+@@ -40,6 +42,7 @@
+ 
+ #define OB_FILE_FORMATS "All supported types (*.*);;SMILES (*.smi);;MDL Molfile (*.mdl *.mol *.sd *.sdf);;XYZ (*.xyz);;ChemDraw Connection Table (*.ct);;Ghemical (*.gpr)"
+ #define GRAPHIC_FILE_FORMATS "Scalable Vector Graphics (*.svg);;Portable Network Graphics (*.png);;Windows Bitmap (*.bmp);;Joint Photo Expert Group (*.jpeg)"
++#define OSRA_GRAPHIC_FILE_FORMATS "All supported types (*.*);;Images (*.png *.bmp *.jpg *.jpeg *.gif *.tif *.tiff);;Documents (*.pdf *.ps)"
+ 
+ 
+ // Constructor
+@@ -211,25 +214,38 @@
+ 
+ bool MainWindow::importDoc()
+ {
+-  QString fileName = QFileDialog::getOpenFileName(this,tr("Import - molsKetch"),QDir::homePath(),tr(OB_FILE_FORMATS));
++  QString fileName = QFileDialog::getOpenFileName(this,tr("Import - molsKetch"),QDir::homePath(),tr(OSRA_GRAPHIC_FILE_FORMATS));
+   if (!fileName.isEmpty())
+     {
+-      Molecule* mol = molsKetch::loadFile(fileName);
++      scene->clear();
++      QProgressBar *pb = new QProgressBar(this);
++      pb->setMinimum(0);
++      pb->setMaximum(0);
++      Molecule* mol=call_osra(fileName);
+       if (mol)
+-        {
+-          scene->addMolecule(mol);
+-          return true;
+-        }
+-      else
+-        {
+-          // Display error message if load fails
+-          QMessageBox::critical(this,tr(PROGRAM_NAME),tr("Error while loading file"),QMessageBox::Ok,QMessageBox::Ok);
+-          return false;
+-        }
++            {
++              if (mol->canSplit())
++                {
++                  QList<Molecule*> molList = mol->split();
++                  foreach(Molecule* mol,molList) scene->addItem(mol);
++                }
++              else
++                {
++                  scene->addItem(mol);
++                }
++              setCurrentFile(fileName);
++	      return true;
++            }
++          else
++            {
++              QMessageBox::critical(this,tr(PROGRAM_NAME),tr("Error importing file"),QMessageBox::Ok,QMessageBox::Ok);
++	      return false;
++            }
+     }
+   return false;
+ }
+ 
++
+ bool MainWindow::exportDoc()
+ {
+   // Getting the filename
+@@ -435,6 +451,11 @@
+                             "selection"));
+   connect(pasteAct, SIGNAL(triggered()), scene, SLOT(paste()));
+ 
++  convertImageAct = new QAction(QIcon(""), tr("C&onvert Image to Mol"),this);
++  convertImageAct->setShortcut(tr("Ctrl+M"));
++  convertImageAct->setStatusTip(tr("Convert Image to Mol using OSRA"));
++  connect(convertImageAct, SIGNAL(triggered()), scene, SLOT(convertImage()));
++
+   selectAllAct = new QAction(QIcon(""), tr("&Select all"),this);
+   selectAllAct->setShortcut(tr("Ctrl+A"));
+   selectAllAct->setStatusTip(tr("Selects all elements on the scene"));
+@@ -540,6 +561,7 @@
+   editMenu->addAction(pasteAct);
+   editMenu->addSeparator();
+   editMenu->addAction(selectAllAct);
++  editMenu->addAction(convertImageAct);
+   editMenu->addAction(alignAct);
+   editMenu->addSeparator();
+   editMenu->addAction(addModeAct);
+diff -Naur molsketch-0.1.1deuterium/src/mainwindow.h molsketch-osra/src/mainwindow.h
+--- molsketch-0.1.1deuterium/src/mainwindow.h	2007-04-30 14:18:22.000000000 -0400
++++ molsketch-osra/src/mainwindow.h	2009-01-04 10:11:19.000000000 -0500
+@@ -248,6 +248,8 @@
+   QAction* copyAct;
+   /** Paste the contents of the clipboard action. */
+   QAction* pasteAct;
++  /** Converts Image to Mol using OSRA */
++  QAction* convertImageAct;
+   /** Select all items on the scene action. */
+   QAction* selectAllAct;
+   /** Align all items to the grid action. */
+diff -Naur molsketch-0.1.1deuterium/src/molscene.cpp molsketch-osra/src/molscene.cpp
+--- molsketch-0.1.1deuterium/src/molscene.cpp	2007-04-30 14:18:22.000000000 -0400
++++ molsketch-osra/src/molscene.cpp	2009-01-04 19:06:56.000000000 -0500
+@@ -29,12 +29,15 @@
+ #include <QTableWidgetItem>
+ #include <QKeyEvent>
+ #include <QUndoStack>
++#include <QProcess>
+ 
+ #include "molscene.h"
+ #include "molecule.h"
+ #include "mollibitem.h"
+ #include "commands.h"
++#include "fileio.h"
+ 
++#include "call_osra.h"
+ 
+ // Constructor & destructor
+ 
+@@ -181,7 +184,7 @@
+   foreach(QGraphicsItem* item, selList) item->setSelected(true);
+   
+   // Emit paste available signal
+-  emit pasteAvailable(!m_clipItems.isEmpty());
++    emit pasteAvailable(!m_clipItems.isEmpty());
+ }
+ 
+ void MolScene::paste()
+@@ -195,6 +198,25 @@
+   stack->endMacro();
+ }
+ 
++void MolScene::convertImage()
++{
++  QClipboard* clipboard = qApp->clipboard();
++  QImage img=clipboard->image();
++
++  if(!img.isNull())
++    {
++      stack->beginMacro(tr("converting image using OSRA"));
++      QString tmpimg=tmpnam(NULL);
++      img.save(tmpimg,"PNG",100);
++      Molecule* mol = call_osra(tmpimg);
++      if (mol) 
++	{
++	  stack->push(new AddItem(new Molecule(mol),this));
++	}
++      remove(tmpimg.toAscii());
++      stack->endMacro();
++    }
++}
+ 
+ void MolScene::clear()
+ {
+diff -Naur molsketch-0.1.1deuterium/src/molscene.h molsketch-osra/src/molscene.h
+--- molsketch-0.1.1deuterium/src/molscene.h	2007-04-30 14:18:22.000000000 -0400
++++ molsketch-osra/src/molscene.h	2009-01-04 10:11:19.000000000 -0500
+@@ -147,6 +147,8 @@
+   void clear();
+   /** Slot to set the edit mode to @p mode. */
+   void setEditMode(int mode);
++  /** Slot to convert image to mol using OSRA */
++  void convertImage();
+   /** Slot to select all contents of the scene. */
+   void selectAll();
+   /** Slot to set the current element to the element of @p item. */

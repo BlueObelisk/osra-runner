@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>uk.ac.cam.ch.osra-runner</groupId>
+        <artifactId>osra-runner-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>osra-runner</artifactId>
+
+    <name>OSRA Runner (core)</name>
+
+    <profiles>
+        <profile>
+            <id>windows-x86</id>
+
+            <activation>
+                <os>
+                    <family>Windows</family>
+                    <arch>x86</arch>
+                </os>
+            </activation>
+
+            <dependencies>
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>osra-windows-x86</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+            </dependencies>
+
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.sf.jnati</groupId>
+            <artifactId>jnati-proc</artifactId>
+            <version>0.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jnati</groupId>
+            <artifactId>jnati-deploy</artifactId>
+            <version>0.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.5</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

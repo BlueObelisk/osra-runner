@@ -1,0 +1,35 @@
+<manifest id="osra" version="1-3-6" platform="WINDOWS" architecture="X86">
+    <file>colors.mgk</file>
+    <file>delegates.mgk</file>
+    <file>libgcc_s_dw2-1.dll</file>
+    <file>libgomp-1.dll</file>
+    <file>libopenbabel-3.dll</file>
+    <file>license.txt</file>
+    <file>log.mgk</file>
+    <file>magic.mgk</file>
+    <file>mingwm10.dll</file>
+    <file>modules.mgk</file>
+    <file>uk.ac.cam.ch.wwmm.osra.bat</file>
+    <file>uk.ac.cam.ch.wwmm.osra.exe</file>
+    <file>uk.ac.cam.ch.wwmm.osra.nsi</file>
+    <file>pthreadGC2.dll</file>
+    <file>README.txt</file>
+    <file>spelling.txt</file>
+    <file>superatom.txt</file>
+    <file>type-ghostscript.mgk</file>
+    <file>type-solaris.mgk</file>
+    <file>type-windows.mgk</file>
+    <file>type.mgk</file>
+    <file>plugins/bkchem/convert_clipboard_image.py</file>
+    <file>plugins/bkchem/convert_clipboard_image.xml</file>
+    <file>plugins/bkchem/README.txt</file>
+    <file>plugins/chemoffice/Import structures with OSRA.py</file>
+    <file>plugins/molsketch/molsketch-uk.ac.cam.ch.wwmm.osra.patch</file>
+    <file>plugins/molsketch/README.txt</file>
+    <file>plugins/pipeline_pilot/Read Image Document (OSRA).xml</file>
+    <file>plugins/pipeline_pilot/README.txt</file>
+    <file>plugins/symyx_draw/OSRAAction.xml</file>
+    <file>plugins/symyx_draw/README.txt</file>
+    <file>plugins/symyx_draw/OSRAAction/OSRAAction.dll</file>
+    <file>plugins/symyx_draw/OSRAAction/OSRAAction.dll.config</file>
+</manifest>
