@@ -1,0 +1,11 @@
+# maven
+^target/
+
+# idea
+^\.idea/
+glob:*.iml
+
+# eclipse
+^\.settings/
+^\.classpath
+^\.project

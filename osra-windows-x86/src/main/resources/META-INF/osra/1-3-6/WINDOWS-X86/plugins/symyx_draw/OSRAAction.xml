@@ -1,0 +1,6 @@
+<mdldraw>
+  <menu name="File">
+    <!-- Specify display string and position, class, and assembly -->
+    <action name="Import Structures using OSRA" index="8" class="Symyx.Draw.Addins.OSRAAddinAction.OSRAAddin" addInAssemblyPath="Addins/OSRAAction/OSRAAction.dll" />
+  </menu>
+</mdldraw>

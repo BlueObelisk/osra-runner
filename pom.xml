@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>wwmm</groupId>
+        <artifactId>wwmm-parent</artifactId>
+        <version>1</version>
+    </parent>
+
+    <groupId>uk.ac.cam.ch.osra-runner</groupId>
+    <artifactId>osra-runner-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>OSRA Runner</name>
+
+    <modules>
+        <module>osra-runner</module>
+        <module>osra-windows-x86</module>
+    </modules>
+
+    <developers>
+        <developer>
+            <id>sea36</id>
+            <name>Sam Adams</name>
+            <organization>Unilever Centre for Molecular Science Informatics, University of Cambridge</organization>
+        </developer>
+    </developers>
+
+    <repositories>
+        <repository>
+            <id>ucc-repo</id>
+            <url>https://maven.ch.cam.ac.uk/m2repo</url>
+        </repository>
+    </repositories>
+
+</project>
