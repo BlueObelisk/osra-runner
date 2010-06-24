@@ -9,9 +9,9 @@
     <file>magic.mgk</file>
     <file>mingwm10.dll</file>
     <file>modules.mgk</file>
-    <file>uk.ac.cam.ch.wwmm.osra.bat</file>
-    <file>uk.ac.cam.ch.wwmm.osra.exe</file>
-    <file>uk.ac.cam.ch.wwmm.osra.nsi</file>
+    <file>osra.bat</file>
+    <file>osra.exe</file>
+    <file>osra.nsi</file>
     <file>pthreadGC2.dll</file>
     <file>README.txt</file>
     <file>spelling.txt</file>
@@ -24,7 +24,7 @@
     <file>plugins/bkchem/convert_clipboard_image.xml</file>
     <file>plugins/bkchem/README.txt</file>
     <file>plugins/chemoffice/Import structures with OSRA.py</file>
-    <file>plugins/molsketch/molsketch-uk.ac.cam.ch.wwmm.osra.patch</file>
+    <file>plugins/molsketch/molsketch-osra.patch</file>
     <file>plugins/molsketch/README.txt</file>
     <file>plugins/pipeline_pilot/Read Image Document (OSRA).xml</file>
     <file>plugins/pipeline_pilot/README.txt</file>
